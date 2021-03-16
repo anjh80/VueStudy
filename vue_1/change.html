@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+      <div id="app">
+            <ul>
+
+                  <li v-for="(item,key) in itemLists" :key="key" v-on:click="changeValue(key)">
+                        <dl>
+                              <dt>{{item.name}}</dt>
+                              <dd>{{item.phone}}</dd>
+                              <dd>{{item.creatAt}}</dd>
+                        </dl>
+                  </li>
+            </ul>
+      </div>
+      <script>
+      new Vue({
+            el: "#app",
+            data: {
+                  itemLists: [{
+                              name: '안지훈',
+                              phone: '010-2396-2036',
+                              createdAt: (new Date())
+                        },
+                        {
+                              name: 'me1',
+                              phone: '1243124-1234124-3214',
+                              createdAt: (new Date())
+                        },
+                        {
+                              name: 'me2',
+                              phone: '010-1234-5676',
+                              createdAt: (new Date())
+                        },
+                  ]
+            },
+            methods: {
+
+                  changeValue: function(key) {
+                        const val_len = this.itemLists.length;
+                        if (val_len < 0) return;
+                        let _obj = JSON.parse(JSON.stringify(this.itemLists));
+                        //비교 let _obj = Object.assign({}, this.itemLists);
+
+                        /*
+                        1.클릭한 것은 맨 위로
+                        */
+                        let _tempArr = [];
+
+                        _tempArr.push(this.itemLists[key]);
+
+                        this.itemLists.forEach((item, index, arr2) => {
+                              console.log(item, index, arr2[index + 1]);
+
+                        })
+
+
+
+                        /*
+                        2. 순서 바꾸기 => refator필요
+                        */
+                        /*
+
+
+                        let keyMod = (key + 1) % val_len;
+                        this.itemLists[key].name = _obj[keyMod].name;
+                        this.itemLists[key].phone = _obj[keyMod].phone;
+                        this.itemLists[key].createdAt = _obj[keyMod].createdAt;
+
+                        this.itemLists[keyMod].name = _obj[key].name;
+                        this.itemLists[keyMod].phone = _obj[key].phone;
+                        this.itemLists[keyMod].createdAt = _obj[key].createdAt;
+                        */
+
+
+
+                  }
+
+            }
+
+
+      })
+      </script>
+</body>
+
+</html>
