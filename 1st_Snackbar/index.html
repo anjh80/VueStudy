@@ -6,10 +6,119 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.3/tailwind.min.css">
       <title>Document</title>
 </head>
+<style>
+#snackbar-container{
+    position :  fixed;
+    left : 50%;
+}
+.snackbar {
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  margin-bottom : 20px;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+.bottomFade-enter-active,
+.bottomFade-leave-active {
+      transition: opacity 2.5s;
+}
+
+.bottomFade-enter,
+.bottomFade-leave-to
+{
+  opacity: 0;
+}
+
+.topFade-enter-active,
+.topFade-leave-active {
+      transition: opacity 2.5s;
+}
+
+.topFade-enter,
+.topFade-leave-to
+{
+  opacity: 0;
+}
+
+
+
+
+
+ul.list li{margin:50px 50px;}
+ul.list li button{focus:outline-none text-white text-sm py-2.5 px-5 rounded-md  hover:shadow-lg}
+</style>
 
 <body>
+
+      <div id="app">
+            <ul class="list">
+                  <li v-for="(value,key) in snackButtonData">
+                        <button class="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md  hover:shadow-lg" v-bind:class="value.buttonBgColor"  @click="showSnackBar(value)">
+                              {{key+1}}.{{value.buttonText}}
+                        </button>
+                  </li>
+            </ul>
+            <transition :name="snackBarObj.transitionName">
+                  <div id="snackbar-container"  v-if="isShow" :name="snackBarObj.transitionName" :style="snackBarObj.position">
+                        <div class="snackbar">{{snackBarObj.message}}</div>
+                  </div>
+            </transition>
+      </div>
+
+      <script>
+      new Vue({
+            el: '#app',
+            data: {
+                  isShow: false,
+                  snackBarObj : {
+                        position : "bottom : 0px",
+                        transitionName : "fade",
+                        message : "",
+                        timeOut : 2000
+                  },
+                  timeOut : 2000,
+                  snackButtonData: [
+                        {
+                              buttonBgColor: "bg-blue-500 hover:bg-blue-600",
+                              buttonText: "Buttom Snackbar",
+                              snackTransitionName : "bottomFade",
+                              message : "아래에서 나오는 SnackBar입니다.",
+                              position : "bottom:0px"
+                        },
+                         {
+                              buttonBgColor: "bg-yellow-500 hover:bg-yellow-600",
+                              buttonText: "Top Snackbar",
+                              snackTransitionName : "topFade",
+                              message : "위에서 나오는 SnackBar입니다.",
+                              position : "top:0px"
+                        },
+
+                  ]
+            },
+            methods :{
+                  showSnackBar : function(value){
+                          this.snackBarObj.position = value.position;
+                          this.snackBarObj.transitionName = value.snackTransitionName;
+                          this.snackBarObj.message = value.message;
+                          this.isShow = true;
+                          setTimeout(()=>{
+                                this.isShow = false;
+                          },this.timeOut);
+                  },
+            }
+      })
+      </script>
 
 </body>
 
