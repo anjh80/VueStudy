@@ -70,7 +70,7 @@ ul.list li button{focus:outline-none text-white text-sm py-2.5 px-5 rounded-md  
                   </li>
             </ul>
             <transition :name="snackBarObj.transitionName">
-                  <div id="snackbar-container"  v-if="isShow" :name="snackBarObj.transitionName" :style="snackBarObj.position">
+                  <div id="snackbar-container"  v-if="isShow" :style="snackBarObj.position">
                         <div class="snackbar">{{snackBarObj.message}}</div>
                   </div>
             </transition>
@@ -85,7 +85,7 @@ ul.list li button{focus:outline-none text-white text-sm py-2.5 px-5 rounded-md  
                         position : "bottom : 0px",
                         transitionName : "fade",
                         message : "",
-                        timeOut : 2000
+                       // timeOut : 2000
                   },
                   timeOut : 2000,
                   snackButtonData: [
