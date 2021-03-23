@@ -7,7 +7,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Admin <sup>2</sup></div>
             </a>
 
             <!-- Divider -->
@@ -18,7 +18,6 @@
                         <i :class="value.iClass"></i>
                     <span>{{value.title}}</span>
                   </a>
-
             </li>
             <hr class="sidebar-divider">
 
@@ -47,15 +46,12 @@ export default {
                         iClass : "fas fa-fw fa-folder",
                         title :"Statics",
                     },
-
               ]
-
         }
   },
   computed: {
     isActive() {
       let current_href_arr = location.href.split("/");
-
       return this.linkObj.link === current_href_arr[3];
     },
   }
