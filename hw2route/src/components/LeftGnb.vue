@@ -12,7 +12,6 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-
             <li  v-for="(value,key) in linkObj" class="nav-item" :class="{active : isActive}" :key="key">
                   <a class="nav-link" :href="value.link" >
                         <i :class="value.iClass"></i>
