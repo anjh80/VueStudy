@@ -1,11 +1,7 @@
 <template>
 <div>
   <b-modal id="modal-1">
-    <div class="d-block">{{boardView.title}}</div>
-    <div class="d-block">
-          <img :src='boardView.thumNail'>
-    </div>
-    <div class="d-block">{{boardView.content}}</div>
+        <div class="d-block" v-for="(value,item) in boardView" :key='item' v-html="value"></div>
   </b-modal>
 </div>
 </template>

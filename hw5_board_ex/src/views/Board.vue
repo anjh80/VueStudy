@@ -1,9 +1,11 @@
 <template>
 <div class="container">
       <v-type @changeBoard="changeBoard"></v-type>
-      <v-basic v-if="boardType==='basic'" :boardList="boardList" @showModal="showModal"></v-basic>
-      <v-gallery v-if="boardType==='gallery'" :boardList="boardList" @showModal="showModal"></v-gallery>
-      <v-webzine v-if="boardType==='webzine'" :boardList="boardList" @showModal="showModal"></v-webzine>
+      <keep-alive>
+            <v-basic v-if="boardType==='basic'" :boardList="boardList" @showModal="showModal"></v-basic>
+            <v-gallery v-if="boardType==='gallery'" :boardList="boardList" @showModal="showModal"></v-gallery>
+            <v-webzine v-if="boardType==='webzine'" :boardList="boardList" @showModal="showModal"></v-webzine>
+      </keep-alive>
       <v-modal :boardView="boardView"></v-modal>
       </div>
 </template>
@@ -71,7 +73,11 @@ export default {
              this.boardType = boardType;
         },
         showModal : function(index){
-              this.boardView = this.boardList[index];
+              this.boardView = {
+                    'title' : this.boardList[index].title,
+                    'thumNail' : '<img src="'+this.boardList[index].thumNail+'" style="width:100%"/>',
+                    'content' : this.boardList[index].content,
+              };
               this.boardList[index].hit = parseInt(this.boardList[index].hit,10) + 1;
               this.$root.$emit('bv::toggle::modal', 'modal-1', '#btnToggle');
         }
