@@ -6,7 +6,12 @@
             <v-gallery v-if="boardType==='gallery'" :boardList="boardList" @showModal="showModal"></v-gallery>
             <v-webzine v-if="boardType==='webzine'" :boardList="boardList" @showModal="showModal"></v-webzine>
       </keep-alive>
-      <v-modal :boardView="boardView"></v-modal>
+      <v-modal :boardView="boardView">
+              <template v-slot:title>{{boardView.title}}</template>
+              <template v-slot:thumNail><img :src="boardView.thumNail" style='width:100%'></template>
+              <template v-slot:content>{{boardView.content}}</template>
+      </v-modal>
+
       </div>
 </template>
 
@@ -68,6 +73,9 @@ export default {
                   ]
             }
       },
+  computed :{
+
+  },
   methods: {
         changeBoard : function(boardType){
              this.boardType = boardType;
@@ -75,7 +83,8 @@ export default {
         showModal : function(index){
               this.boardView = {
                     'title' : this.boardList[index].title,
-                    'thumNail' : '<img src="'+this.boardList[index].thumNail+'" style="width:100%"/>',
+                    'thumNail' : this.boardList[index].thumNail,
+                    //'thumNail' : '<img src="'+this.boardList[index].thumNail+'" style="width:100%"/>',
                     'content' : this.boardList[index].content,
               };
               this.boardList[index].hit = parseInt(this.boardList[index].hit,10) + 1;
