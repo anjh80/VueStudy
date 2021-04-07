@@ -2,7 +2,7 @@
 <div class="masonry">
   <div class="item" v-for="(obj,key) of boardList" :key="key">
     {{obj.title}}
-    <img :src="obj.thumNail" :title="obj.title">
+    <a href="#none" @click="showModal(key)"><img :src="obj.thumNail" :title="obj.title"></a>
   </div>
 
 </div>
@@ -15,6 +15,12 @@ export default {
             boardList :{
                   type : Array
             }
+      },
+      methods: {
+            showModal(obj){
+                  this.$emit('showModal',obj)
+            },
+
       }
 };
 </script>
@@ -40,7 +46,7 @@ export default {
     padding: 1em;
     margin: 0 0 1.5em;
     width: 100%;
-	-webkit-transition:1s ease all;
+   -webkit-transition:1s ease all;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;

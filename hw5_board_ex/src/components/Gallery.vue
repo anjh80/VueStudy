@@ -6,12 +6,14 @@
                   <div  class="b-aspect d-flex h-100 align-items-center">
                         <div class="b-aspect-sizer flex-grow-1" style="padding-bottom: 75%; height: 0px;"></div>
                         <div class="b-aspect-content flex-grow-1 w-100 mw-100" style="margin-left: -100%;">
-                              <img  :src="obj.thumNail" alt="Image" class="rounded-0 card-img">
+                              <a href='#none' @click="showModal(key)">
+                              <img :src="obj.thumNail" alt="Image" class="rounded-0 card-img">
+                              </a>
                         </div>
                   </div>
             </div>
             <div  class="d-flex flex-column p-4 col">
-                  <h2  id="theme-label-0" class="h5 mb-3">{{obj.title}}</h2>
+                  <h2  id="theme-label-0" class="h5 mb-3"> <a href='#none' @click="showModal(key)">{{obj.title}}</a></h2>
                   <p  class="card-text flex-grow-1">{{obj.content}}</p>
                   <p  class="card-text text-muted small"><span  class="d-block d-lg-inline-block mb-2 mb-lg-0"><strong >Writer:</strong> {{obj.writer}}</span> <span  class="d-block d-lg-inline-block ml-lg-3"><i ><strong >writeDate:</strong> {{obj.writeDate}}</i></span></p>
             </div>
@@ -26,6 +28,12 @@ export default {
              boardList : {
               type  : Array
             }
+      },
+      methods: {
+            showModal(obj){
+                  this.$emit('showModal',obj)
+            },
+
       }
 };
 </script>

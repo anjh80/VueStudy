@@ -1,10 +1,10 @@
 <template>
 <div class="container">
       <v-type @changeBoard="changeBoard"></v-type>
-      <v-basic v-if="boardType==='basic'" :boardList="boardList"></v-basic>
-      <v-gallery v-if="boardType==='gallery'" :boardList="boardList"></v-gallery>
-      <v-webzine v-if="boardType==='webzine'" :boardList="boardList"></v-webzine>
-      <v-modal></v-modal>
+      <v-basic v-if="boardType==='basic'" :boardList="boardList" @showModal="showModal"></v-basic>
+      <v-gallery v-if="boardType==='gallery'" :boardList="boardList" @showModal="showModal"></v-gallery>
+      <v-webzine v-if="boardType==='webzine'" :boardList="boardList" @showModal="showModal"></v-webzine>
+      <v-modal :boardView="boardView"></v-modal>
       </div>
 </template>
 
@@ -19,6 +19,7 @@ export default {
   components: {VType, VBasic, VGallery, VWebzine, VModal},
   data(){
             return {
+                  boardView : {},
                   boardType : 'basic',
                   boardList : [
                         {
@@ -39,7 +40,7 @@ export default {
                         },
                         {
                               'title' : '3333333333333333333333333',
-                              'content' : '배고프다..',
+                              'content' : '내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용\n',
                               'writeDate' : '2021-04-07',
                               'writer'   : 'anjihun3',
                               'hit'      : '4',
@@ -47,7 +48,7 @@ export default {
                         },
                         {
                               'title' : '444444444',
-                              'content' : '집에가야지..',
+                              'content' : '내용4444',
                               'writeDate' : '2021-04-07',
                               'writer'   : 'anjihun4',
                               'hit'      : '5',
@@ -68,6 +69,11 @@ export default {
   methods: {
         changeBoard : function(boardType){
              this.boardType = boardType;
+        },
+        showModal : function(index){
+              this.boardView = this.boardList[index];
+              this.boardList[index].hit = parseInt(this.boardList[index].hit,10) + 1;
+              this.$root.$emit('bv::toggle::modal', 'modal-1', '#btnToggle');
         }
   }
 

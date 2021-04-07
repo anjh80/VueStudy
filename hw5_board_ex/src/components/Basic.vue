@@ -11,23 +11,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr v-for="(obj,key) of boardList" :key="key">
+    <tr v-for="(obj,key) of boardList" :key="key"  >
       <th scope="row">{{key+1}}</th>
-      <td>{{obj.title}}</td>
+      <td><a href='#none' @click="showModal(key)">{{obj.title}}</a></td>
       <td>{{obj.writer}}</td>
       <td>{{obj.writeDate}}</td>
        <td>{{obj.hit}}</td>
-
     </tr>
-    <!--
-    <tr @click="toggleModal">
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    -->
-
   </tbody>
 </table>
 </template>
@@ -35,16 +25,21 @@
 <script>
 
 export default {
-  name: 'Basic',
-  props :{
-        boardList : {
-              type  : Array
-        }
-  },
-  methods: {
-    toggleModal() {
-      this.$root.$emit('bv::toggle::modal', 'modal-1', '#btnToggle')
-    }
-}
+      name: 'Basic',
+      props :{
+            boardList : {
+                  type  : Array
+            }
+      },
+      methods: {
+            showModal(obj){
+                  this.$emit('showModal',obj)
+            },
+
+      }
 }
 </script>
+<style scoped>
+tr{cursor:pointer}
+a{font-weight:bold}
+</style>
